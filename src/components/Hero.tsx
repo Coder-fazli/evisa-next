@@ -77,7 +77,7 @@ export function Hero({ title, primaryButton, secondaryButton, processingOptions 
               <ArrowRight size={17} strokeWidth={2.5} />
             </a>
 
-            <a href={secondaryButton?.link ?? "/track"} className={styles.secondaryButton}>
+            <a href={(!secondaryButton?.link || secondaryButton.link === "#") ? "/track" : secondaryButton.link} className={styles.secondaryButton}>
               <Search size={18} />
               {secondaryButton?.text ?? "Track Application"}
             </a>
