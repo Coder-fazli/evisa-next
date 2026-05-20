@@ -43,7 +43,7 @@ export function Footer7({ logoUrl }: Footer7Props = {}) {
       title: t("footer.support"),
       links: [
         { name: t("footer.faq"), href: "/faq" },
-        { name: t("footer.trackApplication"), href: "/" },
+        { name: t("footer.trackApplication"), href: "/track" },
         { name: t("footer.privacyPolicy"), href: "/privacy" },
         { name: t("footer.termsConditions"), href: "/terms" },
       ],
