@@ -11,6 +11,7 @@
   import { FAQSection } from                       
   "@/components/ui/faqs-component";
   import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
+  import { VisaContent } from "@/components/VisaContent";
   import { client } from "@/sanity/client";          
   
   // Getting countries list from Sanity
@@ -45,7 +46,8 @@
          heroSecondaryButton,
          processingOptions,
          steps,
-         faqs
+         faqs,
+         seoContent
         }`,
         { locale },
         { next: { revalidate: 0 } }
@@ -251,6 +253,37 @@
         <NationalitySection countries={countries} />
         <BlogsSection blogs={blogs} />
         <FAQSection faqs={homePage?.faqs || []} />
+        <div style={{ background: "#fff", padding: "48px 24px 64px", maxWidth: 860, margin: "0 auto" }}>
+          <VisaContent
+            body={homePage?.seoContent}
+            locale={locale}
+            fallback={
+              <div>
+                <h2 style={{ fontSize: "1.35rem", fontWeight: 800, color: "#1a1a2e", marginBottom: 14 }}>
+                  Azerbaijan e-Visa — Complete Guide
+                </h2>
+                <p>
+                  Azerbaijan offers an <strong>electronic visa (e-Visa)</strong> to citizens of over 100 countries, making it easier than ever to visit this remarkable country at the crossroads of Europe and Asia. The Azerbaijan e-Visa system was launched in 2017 and has since processed millions of applications from travelers worldwide.
+                </p>
+                <p>
+                  Citizens of <strong>India, China, the United States, the United Kingdom, most EU countries, Saudi Arabia, UAE, Pakistan, and many more</strong> are eligible to apply online. The entire process takes just a few minutes and your visa is delivered directly to your email — no embassy visit required.
+                </p>
+                <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#1a1a2e", margin: "20px 0 10px" }}>
+                  How to Apply for Azerbaijan e-Visa
+                </h3>
+                <p>
+                  The application process is straightforward: fill in your personal and passport details, select your visa type (tourist, business, or transit), pay the government fee online, and receive your approved visa by email within 3 hours (urgent) or 3–5 business days (standard). Your e-Visa is valid for 90 days from the date of issue, allowing a stay of up to 30 days.
+                </p>
+                <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#1a1a2e", margin: "20px 0 10px" }}>
+                  Why Visit Azerbaijan?
+                </h3>
+                <p>
+                  Baku, the capital, blends ultramodern architecture with a UNESCO-listed Old City. The country offers stunning natural landscapes — from the Caucasus mountains to the Caspian Sea coast — rich history, and a rapidly growing tourism infrastructure. Azerbaijan is also known for its hospitality, unique cuisine, and as the "Land of Fire" due to its ancient Zoroastrian heritage and natural gas fires.
+                </p>
+              </div>
+            }
+          />
+        </div>
       </main>
       <Footer7 />
       </>

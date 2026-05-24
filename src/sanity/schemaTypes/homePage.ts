@@ -130,7 +130,14 @@ import { defineField, defineType } from "sanity";
           },                                                  
         ],
       }),                                                     
-      defineField({    
+      defineField({
+        name: "seoContent",
+        title: "SEO Content (bottom of page, with Read More)",
+        type: "array",
+        of: [{ type: "block" }],
+        description: "Rich text shown before the footer with a Read More toggle",
+      }),
+      defineField({
         name: "slug",
         title: "Slug",
         type: "slug",
