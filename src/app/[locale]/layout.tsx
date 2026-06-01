@@ -3,6 +3,7 @@ import { Providers } from "@/components/Providers";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
+import { localizedUrl } from "@/lib/url";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -32,8 +33,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: "Apply for your Azerbaijan e-Visa online. Fast, secure, and 100% official.",
   };
 
+  const baseUrl = "https://azerbaijan-evisa.com";
+
   return {
-    metadataBase: new URL("https://evisa-azerbaijan.com"),
+    metadataBase: new URL(baseUrl),
     title: {
       template: config.template,
       default: config.default,
@@ -42,15 +45,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       type: "website",
       locale: config.locale,
-      url: `https://evisa-azerbaijan.com/${locale}`,
+      url: localizedUrl(baseUrl, locale, ""),
       siteName: config.siteName,
       images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     alternates: {
       languages: {
-        en: "https://evisa-azerbaijan.com/en",
-        es: "https://evisa-azerbaijan.com/es",
-        ar: "https://evisa-azerbaijan.com/ar",
+        en: localizedUrl(baseUrl, "en", ""),
+        es: localizedUrl(baseUrl, "es", ""),
+        ar: localizedUrl(baseUrl, "ar", ""),
       },
     },
   };

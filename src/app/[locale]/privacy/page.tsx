@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { localizedUrl } from "@/lib/url";
 import { NavbarServer as Navbar } from "@/components/NavbarServer";
 import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { client } from "@/sanity/client";
@@ -35,17 +36,17 @@ async function getPage(locale: string) {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const page = await getPage(locale);
-  const baseUrl = "https://evisa-azerbaijan.com";
-  const currentUrl = `${baseUrl}/${locale}/privacy`;
+  const baseUrl = "https://azerbaijan-evisa.com";
+  const currentUrl = localizedUrl(baseUrl, locale, "/privacy");
 
   return {
     title: page?.metaTitle ?? page?.title ?? "Privacy Policy",
     description: page?.metaDescription ?? "",
     alternates: {
       languages: {
-        en: `${baseUrl}/en/privacy`,
-        es: `${baseUrl}/es/privacy`,
-        ar: `${baseUrl}/ar/privacy`,
+        en: localizedUrl(baseUrl, "en", "/privacy"),
+        es: localizedUrl(baseUrl, "es", "/privacy"),
+        ar: localizedUrl(baseUrl, "ar", "/privacy"),
       },
       canonical: currentUrl,
     },

@@ -1,4 +1,5 @@
 import { NavbarServer as Navbar } from "@/components/NavbarServer";
+import { localizedUrl } from "@/lib/url";
 import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { InfoPageHero } from "@/components/infopage/InfoPageHero";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -71,17 +72,17 @@ async function getContactPage(locale: string) {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const page = await getContactPage(locale);
-  const baseUrl = "https://evisa-azerbaijan.com";
-  const currentUrl = `${baseUrl}/${locale}/contact`;
+  const baseUrl = "https://azerbaijan-evisa.com";
+  const currentUrl = localizedUrl(baseUrl, locale, "/contact");
 
   return {
     title: page?.metaTitle ?? "Contact Us – eVisa Azerbaijan",
     description: page?.metaDescription ?? "",
     alternates: {
       languages: {
-        en: `${baseUrl}/en/contact`,
-        es: `${baseUrl}/es/contact`,
-        ar: `${baseUrl}/ar/contact`,
+        en: localizedUrl(baseUrl, "en", "/contact"),
+        es: localizedUrl(baseUrl, "es", "/contact"),
+        ar: localizedUrl(baseUrl, "ar", "/contact"),
       },
       canonical: currentUrl,
     },

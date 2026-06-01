@@ -3,6 +3,7 @@ import { PostGrid } from "@/components/blog/PostGrid";
 import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { client } from "@/sanity/client";
 import styles from "../InfoPage.module.css";
+import { localizedUrl } from "@/lib/url";
 
 async function getPosts(locale: string) {
   try {
@@ -48,6 +49,7 @@ async function getPosts(locale: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const baseUrl = "https://azerbaijan-evisa.com";
 
   const metadataByLocale: Record<string, { title: string; description: string }> = {
     es: {
@@ -70,11 +72,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: meta.description,
     alternates: {
       languages: {
-        en: "https://evisa-azerbaijan.com/en/blog",
-        es: "https://evisa-azerbaijan.com/es/blog",
-        ar: "https://evisa-azerbaijan.com/ar/blog",
+        en: localizedUrl(baseUrl, "en", "/blog"),
+        es: localizedUrl(baseUrl, "es", "/blog"),
+        ar: localizedUrl(baseUrl, "ar", "/blog"),
       },
-      canonical: `https://evisa-azerbaijan.com/${locale}/blog`,
+      canonical: localizedUrl(baseUrl, locale, "/blog"),
     },
   };
 }

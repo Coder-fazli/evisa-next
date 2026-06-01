@@ -3,6 +3,7 @@ import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { InfoPageHero } from "@/components/infopage/InfoPageHero";
 import { TrackClient } from "./TrackClient";
 import styles from "./Track.module.css";
+import { localizedUrl } from "@/lib/url";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: "Check the status of your Azerbaijan e-Visa application by entering your reference number.",
     alternates: {
       languages: {
-        en: `${base}/en/track`,
-        es: `${base}/es/track`,
-        ar: `${base}/ar/track`,
+        en: localizedUrl(base, "en", "/track"),
+        es: localizedUrl(base, "es", "/track"),
+        ar: localizedUrl(base, "ar", "/track"),
       },
-      canonical: `${base}/${locale}/track`,
+      canonical: localizedUrl(base, locale, "/track"),
     },
   };
 }

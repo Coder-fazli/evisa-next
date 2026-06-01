@@ -4,6 +4,7 @@ import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import styles from "../InfoPage.module.css";
+import { localizedUrl } from "@/lib/url";
 
 const SLUG = "cookies";
 
@@ -40,8 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: page?.metaTitle ?? page?.title ?? SLUG,
     description: page?.metaDescription ?? "",
     alternates: {
-      languages: { en: `${baseUrl}/${SLUG}`, es: `${baseUrl}/es/${SLUG}`, ar: `${baseUrl}/ar/${SLUG}` },
-      canonical: `${baseUrl}/${SLUG}`,
+      languages: { en: localizedUrl(baseUrl, "en", `/${SLUG}`), es: localizedUrl(baseUrl, "es", `/${SLUG}`), ar: localizedUrl(baseUrl, "ar", `/${SLUG}`) },
+      canonical: localizedUrl(baseUrl, locale, `/${SLUG}`),
     },
   };
 }

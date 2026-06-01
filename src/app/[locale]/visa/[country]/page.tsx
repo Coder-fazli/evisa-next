@@ -5,6 +5,7 @@ import { InfoCards } from "@/components/country/InfoCards";
 import { CountryContent } from "@/components/country/CountryContent";
 import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { client } from "@/sanity/client";
+import { localizedUrl } from "@/lib/url";
 
 const DEFAULT_INFO_CARDS = [
   { label: "Processing Time", value: "3 Business Days" },
@@ -71,17 +72,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { country, locale } = await params;
   const data = await getCountryData(country, locale);
   const name = data?.name ?? country.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
-  const baseUrl = "https://evisa-azerbaijan.com";
-  const currentUrl = `${baseUrl}/${locale}/visa/${country}`;
+  const baseUrl = "https://azerbaijan-evisa.com";
+  const currentUrl = localizedUrl(baseUrl, locale, `/visa/${country}`);
 
   return {
     title: data?.metaTitle ?? `${name} Visa for Azerbaijan`,
     description: data?.metaDescription ?? `Apply for Azerbaijan e-Visa for ${name} citizens. Fast, secure, and 100% official.`,
     alternates: {
       languages: {
-        en: `${baseUrl}/en/visa/${country}`,
-        es: `${baseUrl}/es/visa/${country}`,
-        ar: `${baseUrl}/ar/visa/${country}`,
+        en: localizedUrl(baseUrl, "en", `/visa/${country}`),
+        es: localizedUrl(baseUrl, "es", `/visa/${country}`),
+        ar: localizedUrl(baseUrl, "ar", `/visa/${country}`),
       },
       canonical: currentUrl,
     },
@@ -141,7 +142,7 @@ export default async function CountryPage({ params }: { params: Promise<{ locale
     "provider": {
       "@type": "Organization",
       "name": "eVisa Azerbaijan",
-      "url": "https://evisa-azerbaijan.com"
+      "url": "https://azerbaijan-evisa.com"
     },
     "areaServed": name,
     "offers": {

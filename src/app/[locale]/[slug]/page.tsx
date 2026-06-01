@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { localizedUrl } from "@/lib/url";
 import { NavbarServer as Navbar } from "@/components/NavbarServer";
 import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { PostSidebar } from "@/components/blog/PostSidebar";
@@ -74,17 +75,17 @@ async function getCountries(locale: string) {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;
   const post = await getPost(slug, locale);
-  const baseUrl = "https://evisa-azerbaijan.com";
-  const currentUrl = `${baseUrl}/${locale}/${slug}`;
+  const baseUrl = "https://azerbaijan-evisa.com";
+  const currentUrl = localizedUrl(baseUrl, locale, `/${slug}`);
 
   return {
     title: post?.metaTitle ?? post?.title ?? "",
     description: post?.metaDescription ?? post?.excerpt ?? "",
     alternates: {
       languages: {
-        en: `${baseUrl}/en/${slug}`,
-        es: `${baseUrl}/es/${slug}`,
-        ar: `${baseUrl}/ar/${slug}`,
+        en: localizedUrl(baseUrl, "en", `/${slug}`),
+        es: localizedUrl(baseUrl, "es", `/${slug}`),
+        ar: localizedUrl(baseUrl, "ar", `/${slug}`),
       },
       canonical: currentUrl,
     },
@@ -104,8 +105,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     month: "long", day: "numeric", year: "numeric",
   });
 
-  const siteUrl = "https://evisa-azerbaijan.com";
-  const postUrl = `${siteUrl}/${slug}`;
+  const siteUrl = "https://azerbaijan-evisa.com";
+  const postUrl = localizedUrl(siteUrl, locale, `/${slug}`);
 
   const articleSchema = {
     "@context": "https://schema.org",

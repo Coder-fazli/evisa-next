@@ -7,6 +7,7 @@ import { NationalitySection } from "@/components/NationalitySection";
 import { FAQSection } from "@/components/ui/faqs-component";
 import { client } from "@/sanity/client";
 import { VisaContent } from "@/components/VisaContent";
+import { localizedUrl } from "@/lib/url";
 
 async function getPage(locale: string) {
   const langMap: Record<string, { title: string; body: string; metaTitle: string; metaDescription: string }> = {
@@ -78,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const page = await getPage(locale);
   const baseUrl = "https://azerbaijan-evisa.com";
-  const currentUrl = `${baseUrl}/${locale}/visa`;
+  const currentUrl = localizedUrl(baseUrl, locale, "/visa");
 
   // SEO-optimized fallbacks based on Search Console keywords:
   // "eligible countries egypt" (141), "eligible countries list" (53+),
@@ -108,9 +109,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: metaDescription,
     alternates: {
       languages: {
-        en: `${baseUrl}/en/visa`,
-        es: `${baseUrl}/es/visa`,
-        ar: `${baseUrl}/ar/visa`,
+        en: localizedUrl(baseUrl, "en", "/visa"),
+        es: localizedUrl(baseUrl, "es", "/visa"),
+        ar: localizedUrl(baseUrl, "ar", "/visa"),
       },
       canonical: currentUrl,
     },

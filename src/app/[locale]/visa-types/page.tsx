@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { localizedUrl } from "@/lib/url";
 import { NavbarServer as Navbar } from "@/components/NavbarServer";
 import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
 import { InfoPageHero } from "@/components/infopage/InfoPageHero";
@@ -37,17 +38,17 @@ async function getPage(locale: string) {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const page = await getPage(locale);
-  const baseUrl = "https://evisa-azerbaijan.com";
-  const currentUrl = `${baseUrl}/${locale}/visa-types`;
+  const baseUrl = "https://azerbaijan-evisa.com";
+  const currentUrl = localizedUrl(baseUrl, locale, "/visa-types");
 
   return {
     title: page?.metaTitle ?? page?.title ?? "Visa Types",
     description: page?.metaDescription ?? "",
     alternates: {
       languages: {
-        en: `${baseUrl}/en/visa-types`,
-        es: `${baseUrl}/es/visa-types`,
-        ar: `${baseUrl}/ar/visa-types`,
+        en: localizedUrl(baseUrl, "en", "/visa-types"),
+        es: localizedUrl(baseUrl, "es", "/visa-types"),
+        ar: localizedUrl(baseUrl, "ar", "/visa-types"),
       },
       canonical: currentUrl,
     },

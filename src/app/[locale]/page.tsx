@@ -12,7 +12,8 @@
   "@/components/ui/faqs-component";
   import { Footer7Server as Footer7 } from "@/components/ui/footer-7-server";
   import { VisaContent } from "@/components/VisaContent";
-  import { client } from "@/sanity/client";          
+  import { client } from "@/sanity/client";
+  import { localizedUrl } from "@/lib/url";
   
   // Getting countries list from Sanity
   async function getCountries(locale: string) {
@@ -119,21 +120,24 @@
       description: "Get your e visa Azerbaijan online in minutes. Fast electronic visa application. ASAN official e-visa portal. Processing as fast as 3 hours.",
     };
 
+    const baseUrl = "https://azerbaijan-evisa.com";
+    const currentUrl = localizedUrl(baseUrl, locale, "");
+
     return {
       title: meta.title,
       description: meta.description,
       alternates: {
         languages: {
-          en: "https://azerbaijan-evisa.com/en",
-          es: "https://azerbaijan-evisa.com/es",
-          ar: "https://azerbaijan-evisa.com/ar",
+          en: localizedUrl(baseUrl, "en", ""),
+          es: localizedUrl(baseUrl, "es", ""),
+          ar: localizedUrl(baseUrl, "ar", ""),
         },
-        canonical: `https://azerbaijan-evisa.com/${locale}`,
+        canonical: currentUrl,
       },
       openGraph: {
         title: meta.title,
         description: meta.description,
-        url: `https://azerbaijan-evisa.com/${locale}`,
+        url: currentUrl,
         type: "website",
         locale: locale === "es" ? "es_ES" : locale === "ar" ? "ar_SA" : "en_US",
       },
