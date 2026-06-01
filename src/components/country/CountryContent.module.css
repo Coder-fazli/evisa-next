@@ -75,12 +75,21 @@
   margin-bottom: 16px;
 }
 
-.content ul {
-  padding-left: 22px;
+.content ul,
+.content ol {
+  padding-inline-start: 22px;
   margin-bottom: 20px;
 }
 
-.content ul li {
+.content ul {
+  list-style: disc outside;
+}
+
+.content ol {
+  list-style: decimal outside;
+}
+
+.content li {
   font-size: 17px;
   color: #4b5563;
   line-height: 1.8;

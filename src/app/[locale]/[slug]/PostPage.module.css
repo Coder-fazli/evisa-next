@@ -217,8 +217,16 @@
 
 .body ul,
 .body ol {
-  padding-left: 24px;
+  padding-inline-start: 24px;
   margin-bottom: 20px;
+}
+
+.body ul {
+  list-style: disc outside;
+}
+
+.body ol {
+  list-style: decimal outside;
 }
 
 .body li {
