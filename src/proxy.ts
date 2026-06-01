@@ -56,12 +56,6 @@ export async function proxy(req: NextRequest) {
   // 2. Locale routing (next-intl)
   const localeMatch = pathname.match(/^\/(en|es|ar)(\/|$)/);
   if (localeMatch) {
-    // English has no prefix — 301 redirect /en/* → /* to avoid duplicate URLs
-    if (localeMatch[1] === "en") {
-      const stripped = pathname.replace(/^\/en(?=\/|$)/, "") || "/";
-      const url = new URL(stripped + req.nextUrl.search, req.url);
-      return NextResponse.redirect(url, { status: 301 });
-    }
     const response = NextResponse.next({
       request: {
         headers: new Headers({
